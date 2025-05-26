@@ -1,0 +1,91 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+
+  --border: #e4e4e7;
+  --input: #f4f4f5;
+
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f4f4f5;
+  --secondary-foreground: #111111;
+
+  --accent: #ff5555;
+  --accent-foreground: #ffffff;
+
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #111111;
+  --foreground: #f4f4f5;
+
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+
+  --border: #27272a;
+  --input: #27272a;
+
+  --primary: #f4f4f5;
+  --primary-foreground: #111111;
+
+  --secondary: #27272a;
+  --secondary-foreground: #f4f4f5;
+
+  --accent: #ff5555;
+  --accent-foreground: #111111;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.focus-mode * {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
+
+.focus-mode .react-flow,
+.focus-mode .focus-mode-exception {
+  opacity: 1;
+}
+
+.hexagon-shape {
+  width: 100px;
+  height: 55px;
+  background-color: inherit;
+  position: relative;
+  border: inherit;
+}
+
+.hexagon-shape::before,
+.hexagon-shape::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+}
+
+.hexagon-shape::before {
+  bottom: 100%;
+  border-bottom: 27.5px solid;
+}
+
+.hexagon-shape::after {
+  top: 100%;
+  border-top: 27.5px solid;
+}
