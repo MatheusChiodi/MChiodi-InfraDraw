@@ -1,26 +1,28 @@
-# 🧪 Template Base - Tailwind + Vite + Prettier
+# 🧠 InfraDraw – Technical Diagrams & Mind Maps 100% Client-Side
 
-Este projeto é um template base ideal para iniciar aplicações modernas com foco em performance, organização e produtividade no desenvolvimento front-end.  
-Ele vem pronto para usar **Tailwind CSS**, **Prettier** com ordenação automática das classes, **Vite.js**, **Lucide React** e **Framer Motion**.
+**InfraDraw** is a modern, lightweight web tool that allows you to create technical diagrams and mind maps directly in your browser — **no backend or login required**. Perfect for developers, software architects, and technical teams who need to document systems visually, quickly, and intuitively.
 
----
-
-## 🚀 Tecnologias Utilizadas
-
-- [**Vite.js**](https://vitejs.dev/) — Build tool extremamente rápido e leve
-- [**Tailwind CSS**](https://tailwindcss.com/) — Framework de CSS utilitário
-- [**Prettier**](https://prettier.io/) + [`prettier-plugin-tailwindcss`](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) — Formatação automática com ordenação das classes do Tailwind
-- [**Lucide React**](https://lucide.dev/) — Ícones modernos e personalizáveis via React
-- [**Framer Motion**](https://www.framer.com/motion/) — Biblioteca de animações simples e poderosas para React
+![InfraDraw Banner](https://your-screenshot-url.com/banner.png)
 
 ---
 
-## 📦 Como usar este template
+## 🚀 Key Features
 
-1. Clone o projeto com [`degit`](https://github.com/Rich-Harris/degit):
+- 🔲 **Customizable blocks**: APIs, frontends, databases, queues, services, and more.
+- ➡️ **Visual connection between blocks**: arrows and lines to represent data flow and dependencies.
+- 🎨 **Full visual editor**: customize block name, description, color, shape, and icon.
+- 🔁 **Smooth drag-and-drop**: refined UX for fluid interactions.
+- 🌗 **Dark/Light theme**: instant appearance switching.
+- 🔍 **Zoom & Pan**: navigate large diagrams with ease.
+- 💾 **Local saving**: all data is stored in `localStorage` — your privacy is guaranteed.
 
-```bash
-npx degit SEU_USUARIO_GITHUB/NOME_DO_REPO nome-do-seu-projeto
-cd nome-do-seu-projeto
-npm install
-npm run dev
+---
+
+## 🧩 Technologies Used
+
+- **React.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **React Flow** (for block rendering and connections)
+- **Framer Motion** (entry animations and interactions)
+- **Lucide React** (clean, lightweight icons)
