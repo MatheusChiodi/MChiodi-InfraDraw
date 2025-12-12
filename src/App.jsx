@@ -8,6 +8,7 @@ import { useDeviceCheck } from "./hooks/useDeviceCheck";
 
 export default function App() {
   const [focusMode, setFocusMode] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const isAllowed = useDeviceCheck();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,6 +33,10 @@ export default function App() {
 
   const handleToggleFocus = () => {
     setFocusMode((prev) => !prev);
+  };
+
+  const handleToggleSidebar = () => {
+    setSidebarOpen((prev) => !prev);
   };
 
   if (!isAllowed) {
@@ -61,9 +66,14 @@ export default function App() {
     return (
       <ReactFlowProvider>
         <div className="flex h-screen w-screen flex-col">
-          <Header onToggleFocus={handleToggleFocus} focusMode={focusMode} />
+          <Header
+            onToggleFocus={handleToggleFocus}
+            focusMode={focusMode}
+            sidebarOpen={sidebarOpen}
+            onToggleSidebar={handleToggleSidebar}
+          />
           <div className="flex flex-1 overflow-hidden">
-            <Sidebar focusMode={focusMode} />
+            <Sidebar focusMode={focusMode} sidebarOpen={sidebarOpen} />
             <Canvas focusMode={focusMode} />
           </div>
         </div>
