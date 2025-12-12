@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components/Header";
 import { Canvas } from "./components/Canvas";
@@ -8,26 +9,32 @@ import { useDeviceCheck } from "./hooks/useDeviceCheck";
 
 export default function App() {
   const [focusMode, setFocusMode] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const isAllowed = useDeviceCheck();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
+  // Carrega mais rápido se já visitou recentemente
+  const getInitialLoadingState = () => {
     const lastVisit = localStorage.getItem("lastVisit");
     const now = Date.now();
     const oneHour = 60 * 60 * 1000;
+    return !lastVisit || now - parseInt(lastVisit, 10) > oneHour;
+  };
 
-    if (!lastVisit || now - parseInt(lastVisit, 10) > oneHour) {
-      localStorage.setItem("lastVisit", now.toString());
+  const [isLoading, setIsLoading] = useState(getInitialLoadingState);
 
+  useEffect(() => {
+    if (isLoading) {
+      const lastVisit = localStorage.getItem("lastVisit");
+      const now = Date.now();
+      if (!lastVisit || now - parseInt(lastVisit, 10) > 60 * 60 * 1000) {
+        localStorage.setItem("lastVisit", now.toString());
+      }
+      // Mostra loading apenas por 1 segundo para primeira visita
       const timer = setTimeout(() => {
         setIsLoading(false);
-      }, 3000);
-
+      }, 1000);
       return () => clearTimeout(timer);
-    } else {
-      setIsLoading(false);
     }
-  }, []);
+  }, [isLoading]);
 
   const handleToggleFocus = () => {
     setFocusMode((prev) => !prev);
@@ -59,13 +66,28 @@ export default function App() {
   } else {
     return (
       <ReactFlowProvider>
-        <div className="flex h-screen w-screen flex-col">
-          <Header onToggleFocus={handleToggleFocus} focusMode={focusMode} />
-          <div className="flex flex-1 overflow-hidden">
-            <Sidebar focusMode={focusMode} />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex h-screen w-screen flex-col"
+        >
+          <Header
+            onToggleFocus={handleToggleFocus}
+            focusMode={focusMode}
+            sidebarOpen={sidebarOpen}
+            onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="flex flex-1 overflow-hidden"
+          >
+            <Sidebar focusMode={focusMode} isOpen={sidebarOpen} />
             <Canvas focusMode={focusMode} />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </ReactFlowProvider>
     );
   }

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useSidebarStore, Block } from "../hooks/useSidebarStore";
 import { BlockCategory } from "./BlockCategory";
 
-export const Sidebar = ({ focusMode }: { focusMode: boolean }) => {
+export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boolean }) => {
   const {
     categories,
     favorites,
@@ -49,9 +49,14 @@ export const Sidebar = ({ focusMode }: { focusMode: boolean }) => {
   return (
     <>
       <motion.aside
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className={`flex h-screen w-72 flex-col gap-5 overflow-auto border-r border-neutral-200 bg-white px-2 pb-20 pt-5 text-neutral-900 backdrop-blur-md dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white ${focusMode ? "hidden" : "block"}`}
+        initial={{ opacity: 0, x: -300 }}
+        animate={{ 
+          opacity: isOpen && !focusMode ? 1 : 0,
+          x: isOpen && !focusMode ? 0 : -300,
+          pointerEvents: isOpen && !focusMode ? "auto" : "none"
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="flex h-screen w-72 flex-col gap-5 overflow-auto border-r border-neutral-200 bg-white px-2 pb-20 pt-5 text-neutral-900 backdrop-blur-md dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white"
       >
         <div className="flex flex-col gap-2">
           <h2 className="text-xl font-bold">📦 Blocos</h2>
