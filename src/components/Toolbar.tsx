@@ -127,7 +127,7 @@ export const Toolbar = ({
             dragConstraints={{ top: -100, bottom: 100 }}
             dragElastic={0.3}
             onDragEnd={handleDragEnd}
-            className="fixed left-1/2 top-1/2 z-50 w-[400px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[32px] bg-white/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] backdrop-blur-2xl dark:bg-neutral-900/95"
+            className="fixed top-1/2 left-1/2 z-50 w-[400px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[32px] bg-white/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] backdrop-blur-2xl dark:bg-neutral-900/95"
           >
             {/* Handle (pega) no topo */}
             <div className="flex h-10 cursor-grab items-center justify-center active:cursor-grabbing">
@@ -139,7 +139,7 @@ export const Toolbar = ({
             </div>
 
             {/* Conteúdo com scroll */}
-            <div className="max-h-[500px] overflow-y-auto overflow-x-hidden px-5 pb-6">
+            <div className="max-h-[500px] overflow-x-hidden overflow-y-auto px-5 pb-6">
               <div className="flex flex-wrap gap-2.5">
                 {onUndo && (
                   <ToolbarButton
