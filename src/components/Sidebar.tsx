@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useSidebarStore, Block } from "../hooks/useSidebarStore";
 import { BlockCategory } from "./BlockCategory";
 
-export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boolean }) => {
+export const Sidebar = ({ focusMode }: { focusMode: boolean }) => {
   const {
     categories,
     favorites,
@@ -49,19 +49,14 @@ export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boo
   return (
     <>
       <motion.aside
-        initial={{ opacity: 0, x: -300 }}
-        animate={{ 
-          opacity: isOpen && !focusMode ? 1 : 0,
-          x: isOpen && !focusMode ? 0 : -300,
-          pointerEvents: isOpen && !focusMode ? "auto" : "none"
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="flex h-screen w-72 flex-col gap-5 overflow-auto border-r border-neutral-200 bg-white px-2 pb-20 pt-5 text-neutral-900 backdrop-blur-md dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        className={`flex h-screen w-72 flex-col gap-5 overflow-auto border-r border-neutral-200 bg-white px-2 pt-5 pb-20 text-neutral-900 backdrop-blur-md dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white ${focusMode ? "hidden" : "block"}`}
       >
         <div className="flex flex-col gap-2">
           <h2 className="text-xl font-bold">📦 Blocos</h2>
           <input
-            className="w-full rounded-md border border-gray-200 bg-gray-100 px-3 py-3 text-xs text-white shadow-lg placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-[#FF5555] dark:border-neutral-700 dark:bg-neutral-800"
+            className="w-full rounded-md border border-gray-200 bg-gray-100 px-3 py-3 text-xs text-white shadow-lg placeholder:text-neutral-500 focus:ring-1 focus:ring-[#FF5555] focus:outline-none dark:border-neutral-700 dark:bg-neutral-800"
             placeholder="🔍 Buscar..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -143,7 +138,7 @@ export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boo
             {/* 🔥 Form */}
             <div className="flex max-h-[70vh] flex-col gap-4 overflow-auto">
               <input
-                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#FF5555] dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-500 focus:ring-2 focus:ring-[#FF5555] focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                 placeholder="Nome do bloco"
                 value={newBlock.label}
                 onChange={(e) =>
@@ -152,7 +147,7 @@ export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boo
               />
 
               <input
-                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#FF5555] dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-500 focus:ring-2 focus:ring-[#FF5555] focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                 placeholder="ID único"
                 value={newBlock.type}
                 onChange={(e) =>
@@ -166,7 +161,7 @@ export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boo
                 onChange={(e) =>
                   setNewBlock({ ...newBlock, category: e.target.value })
                 }
-                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#FF5555] dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 focus:ring-2 focus:ring-[#FF5555] focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
               >
                 <option value="">Selecione uma categoria</option>
                 {categories.map((cat) => (
@@ -181,7 +176,7 @@ export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boo
                 onChange={(e) =>
                   setNewBlock({ ...newBlock, shape: e.target.value as any })
                 }
-                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#FF5555] dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 focus:ring-2 focus:ring-[#FF5555] focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
               >
                 <option value="rectangle">Retângulo</option>
                 <option value="circle">Círculo</option>
@@ -288,7 +283,7 @@ export const Sidebar = ({ focusMode, isOpen }: { focusMode: boolean; isOpen: boo
             {/* 🔥 Form */}
             <div className="flex flex-col gap-4">
               <input
-                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#FF5555] dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                className="w-full rounded-md border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-500 focus:ring-2 focus:ring-[#FF5555] focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
                 placeholder="Nome da categoria"
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
